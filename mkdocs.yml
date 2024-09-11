@@ -1,0 +1,15 @@
+site_name: Guia docker
+theme:
+  name: material
+
+# Opcional: Plugins para adicionar funcionalidades extras
+plugins:
+  - search
+
+# Opcional: Configuração de extensões do Markdown
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - codehilite

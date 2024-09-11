@@ -1,0 +1,30 @@
+# Use a imagem base do Ubuntu
+FROM ubuntu:22.04
+
+# Instale dependências necessárias
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    build-essential
+
+# Adicione o repositório do Node.js e instale o Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+# Crie o diretório de trabalho no contêiner
+WORKDIR /usr/src/app
+
+# Copie o package.json e package-lock.json para o diretório de trabalho
+COPY package*.json ./
+
+# Instale as dependências do projeto
+RUN npm install
+
+# Copie o restante dos arquivos da aplicação
+COPY . .
+
+# Exponha a porta em que a aplicação vai rodar
+EXPOSE 3000
+
+# Comando para rodar a aplicação
+CMD ["node", "src/index.js"]
